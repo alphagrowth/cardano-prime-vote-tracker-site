@@ -35,12 +35,11 @@ const teams = [
 ];
 
 const constellation = [
-  [0, 1, 18, 132, -0.7], [20, 5, 16, 118, 0.4], [39, 0, 20, 126, -0.25], [62, 5, 17, 118, 0.65], [81, 1, 17, 122, -0.4],
-  [0, 18, 18, 122, 0.35], [20, 22, 18, 128, -0.6], [40, 17, 18, 132, 0.35], [61, 22, 18, 122, -0.3], [81, 18, 17, 120, 0.45],
-  [0, 36, 17, 120, -0.5], [20, 39, 18, 126, 0.55], [40, 34, 18, 134, -0.25], [61, 40, 18, 120, 0.45], [82, 36, 16, 122, -0.7],
-  [0, 54, 18, 122, 0.3], [20, 58, 18, 118, -0.55], [40, 53, 18, 130, 0.4], [61, 58, 18, 118, -0.35], [81, 54, 17, 122, 0.4],
-  [7, 72, 19, 122, 0.65], [31, 76, 18, 124, -0.4], [55, 71, 19, 120, 0.3], [79, 76, 18, 126, -0.5],
-  [8, 88, 19, 122, -0.3], [32, 91, 18, 120, 0.55], [56, 87, 18, 128, -0.25], [79, 91, 19, 122, 0.35],
+  [0, 3, 15.3, 112, -0.28], [16.8, 2, 15.5, 108, 0.2], [33.6, 3, 15.4, 114, -0.18], [50.4, 2, 15.6, 110, 0.28], [67.2, 3, 15.3, 112, -0.24], [84, 2, 15.5, 108, 0.2],
+  [8.4, 21, 15.5, 110, 0.18], [25.2, 20, 15.3, 114, -0.3], [42, 21, 15.6, 112, 0.22], [58.8, 20, 15.4, 108, -0.2], [75.6, 21, 15.5, 112, 0.26],
+  [0, 39, 15.4, 110, -0.22], [16.8, 38, 15.5, 114, 0.26], [33.6, 39, 15.3, 116, -0.18], [50.4, 38, 15.6, 110, 0.2], [67.2, 39, 15.4, 112, -0.28], [84, 38, 15.5, 108, 0.18],
+  [8.4, 57, 15.5, 112, 0.22], [25.2, 56, 15.3, 108, -0.26], [42, 57, 15.6, 114, 0.18], [58.8, 56, 15.4, 110, -0.22], [75.6, 57, 15.5, 112, 0.2],
+  [0, 75, 15.4, 110, -0.18], [16.8, 74, 15.5, 114, 0.24], [33.6, 75, 15.3, 112, -0.22], [50.4, 74, 15.6, 108, 0.18], [67.2, 75, 15.4, 112, -0.24], [84, 74, 15.5, 110, 0.2],
 ];
 
 const supporters = [
@@ -430,8 +429,8 @@ if (finePointer && !reducedMotion) {
     const fieldRect = logoField.getBoundingClientRect();
     logoField.style.setProperty("--field-cursor-x", `${(pointerX - fieldRect.left).toFixed(1)}px`);
     logoField.style.setProperty("--field-cursor-y", `${(pointerY - fieldRect.top).toFixed(1)}px`);
-    const radius = Math.min(380, Math.max(260, fieldRect.width * .42));
-    const maxSpread = Math.min(32, Math.max(22, fieldRect.width * .031));
+    const radius = Math.min(315, Math.max(220, fieldRect.width * .34));
+    const maxSpread = Math.min(18, Math.max(13, fieldRect.width * .016));
 
     cardSnapshots.forEach(({ card, centerX, centerY, width, height }) => {
       const dx = pointerX - centerX;
@@ -443,13 +442,13 @@ if (finePointer && !reducedMotion) {
       const power = influence * influence * (3 - 2 * influence);
       const safeDistance = Math.max(distance, 20);
       const insideBoost = Math.max(0, 1 - distance / Math.max(width, height));
-      const spread = maxSpread * power + 11 * insideBoost;
-      const rowPush = (centerX >= pointerX ? 1 : -1) * maxSpread * .34 * Math.max(0, 1 - Math.abs(dy) / (height * 1.45));
-      const x = Math.max(-34, Math.min(34, (-dx / safeDistance) * spread + rowPush));
-      const y = (-dy / safeDistance) * spread - 7 * power;
-      const z = 24 * power;
-      const rotation = Math.max(-5, Math.min(5, (-dx / Math.max(width, 1)) * 5 * power));
-      setCardMotion(card, x, y, z, rotation, 1 + .032 * power, 1);
+      const spread = maxSpread * power + 7 * insideBoost;
+      const rowPush = (centerX >= pointerX ? 1 : -1) * maxSpread * .25 * Math.max(0, 1 - Math.abs(dy) / (height * 1.45));
+      const x = Math.max(-22, Math.min(22, (-dx / safeDistance) * spread + rowPush));
+      const y = (-dy / safeDistance) * spread - 5 * power;
+      const z = 18 * power;
+      const rotation = Math.max(-3.5, Math.min(3.5, (-dx / Math.max(width, 1)) * 3.5 * power));
+      setCardMotion(card, x, y, z, rotation, 1 + .022 * power, 1);
     });
   };
 
