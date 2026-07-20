@@ -15,7 +15,12 @@ const teams = [
   { name: "Indigo", url: "https://indigoprotocol.io/", logo: "indigo-labs.png" },
   { name: "Lace", url: "https://www.lace.io/", logo: "lace-wordmark.svg" },
   { name: "Liqwid", url: "https://www.liqwid.finance/", logo: "liqwid.svg", status: "PUBLIC SUPPORT" },
-  { name: "Midgard Labs", url: "https://midgardprotocol.com/", logo: "midgard.png" },
+  {
+    name: "Midgard Labs",
+    url: "https://x.com/phil_uplc/status/2068021257434542489",
+    logo: "midgard.png",
+    linkLabel: "View the public support source for Midgard Labs",
+  },
   { name: "Moneta/USDM", url: "https://moneta.global/", logo: "moneta-usdm.png" },
   { name: "Pandora", url: "https://pondora.org/", logo: "pondora.svg" },
   { name: "Pogun", url: "https://pogun.io/", logo: "pogun-wordmark.svg" },
@@ -118,7 +123,7 @@ const heroTeamNames = teams.slice(0, 8).map((team) => team.name);
 const heroTeams = heroTeamNames.map((name) => teams.find((team) => team.name === name)).filter(Boolean);
 
 heroTeamRail.innerHTML = heroTeams.map((team) => `
-  <a href="${team.url}" target="_blank" rel="noreferrer" aria-label="Visit ${team.name}">
+  <a href="${team.url}" target="_blank" rel="noreferrer" aria-label="${team.linkLabel || `Visit ${team.name}`}">
     <img src="assets/ecosystem/${team.logo}" alt="${team.name}" loading="eager" />
   </a>
 `).join("");
@@ -138,7 +143,7 @@ logoField.innerHTML = `
     data-shape="${team.shape || "wide"}"
     data-invert="${team.invert || false}"
     style="--x:${x};--y:${y};--w:${w};--h:${h};--base-r:${rotation}deg;--float-speed:${(7.2 + (index % 5) * .52).toFixed(2)};--delay:-${(index * 0.61).toFixed(2)}s"
-    aria-label="Visit ${team.name}"
+    aria-label="${team.linkLabel || `Visit ${team.name}`}"
   >
     ${team.status ? `<span class="team-status">${team.status}</span>` : ""}
     <img src="assets/ecosystem/${team.logo}" alt="${team.name}" loading="${index < 8 ? "eager" : "lazy"}" />

@@ -15,5 +15,5 @@ The site is static HTML, CSS, and JavaScript and deploys directly to Vercel.
 
 - [Official governance action](https://app.cgov.io/governance/529dccaadaa000746c22f1682574cb3f436eeba4d19710b90791a54226dc96d7%3A0)
 - [AlphaGrowth](https://alphagrowth.io/)
-- [NCL Tracker](https://ncl-tracker.vercel.app)
+- [Live vote tracker on AdaStat](https://adastat.net/governances/529dccaadaa000746c22f1682574cb3f436eeba4d19710b90791a54226dc96d700)
 - [Midgard ecosystem partner assets](https://github.com/davedio/migard-new-imagery)
