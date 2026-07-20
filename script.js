@@ -20,6 +20,14 @@ const teams = [
   { name: "WingRiders", url: "https://www.wingriders.com/", logo: "wingriders.svg" },
 ];
 
+const constellation = [
+  [2, 5, 24, 132, -0.7], [31, 1, 17, 116, 0.4], [53, 7, 22, 126, -0.25], [80, 3, 18, 118, 0.65],
+  [9, 25, 14, 118, 0.35], [29, 23, 16, 128, -0.6], [52, 29, 22, 132, 0.35], [77, 25, 20, 122, -0.3],
+  [0, 47, 16, 116, -0.5], [21, 43, 18, 126, 0.55], [42, 50, 20, 134, -0.25], [67, 44, 18, 120, 0.45], [86, 48, 12, 116, -0.7],
+  [9, 68, 20, 122, 0.3], [35, 72, 17, 118, -0.55], [59, 68, 18, 130, 0.4], [81, 73, 17, 118, -0.35],
+  [22, 89, 14, 116, 0.65], [59, 88, 24, 124, -0.4],
+];
+
 const supporters = [
   ["YUTA", "drep1y2200we9c904un36tzaearntzzl63snffuul9qsk0te4utqfkke0w", 2],
   ["CryptoCrow", "drep1ytfwpmt2fvdnyvlswyjyggpf8alwkpm7ha6cua9nsak525ssmvm57", 5],
@@ -82,7 +90,13 @@ const drepGrid = document.querySelector("#drepGrid");
 const emptyState = document.querySelector("#emptyState");
 const supporterCount = document.querySelector("#supporterCount");
 
-logoField.innerHTML = teams.map((team, index) => `
+logoField.innerHTML = `
+  <div class="field-core" aria-hidden="true">
+    <span class="field-core__label"><span>CARDANO</span><strong>DeFi</strong><span>PRIME NETWORK</span></span>
+  </div>
+` + teams.map((team, index) => {
+  const [x, y, w, h, rotation] = constellation[index];
+  return `
   <a
     class="team-card"
     href="${team.url}"
@@ -90,14 +104,15 @@ logoField.innerHTML = teams.map((team, index) => `
     rel="noreferrer"
     data-shape="${team.shape || "wide"}"
     data-invert="${team.invert || false}"
-    style="--delay: -${(index * 0.43).toFixed(2)}s"
+    style="--x:${x};--y:${y};--w:${w};--h:${h};--base-r:${rotation}deg;--float-speed:${(7.2 + (index % 5) * .52).toFixed(2)};--delay:-${(index * 0.61).toFixed(2)}s"
     aria-label="Visit ${team.name}"
   >
     ${team.status ? `<span class="team-status">${team.status}</span>` : ""}
     <img src="assets/ecosystem/${team.logo}" alt="${team.name}" loading="lazy" />
     <span class="team-name">${String(index + 1).padStart(2, "0")} · ${team.name}</span>
   </a>
-`).join("");
+  `;
+}).join("");
 
 function renderSupporters(items) {
   drepGrid.innerHTML = items.map(([name, id, rank]) => `
@@ -135,6 +150,11 @@ const revealObserver = new IntersectionObserver((entries) => {
 
 document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
 
+const fieldObserver = new IntersectionObserver(([entry]) => {
+  logoField.classList.toggle("is-in-view", entry.isIntersecting);
+}, { rootMargin: "180px 0px" });
+fieldObserver.observe(logoField);
+
 const finePointer = window.matchMedia("(pointer: fine)").matches;
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -147,32 +167,86 @@ if (finePointer && !reducedMotion) {
   let pointerY = window.innerHeight / 2;
   let haloX = pointerX;
   let haloY = pointerY;
-  let frameRequested = false;
+  let magnetFrame = null;
+  let cardSnapshots = [];
+  let fieldActive = false;
+
+  const setCardMotion = (card, x = 0, y = 0, z = 0, rotation = 0, scale = 1, opacity = 1) => {
+    card.style.setProperty("--mag-x", `${x.toFixed(2)}px`);
+    card.style.setProperty("--mag-y", `${y.toFixed(2)}px`);
+    card.style.setProperty("--mag-z", `${z.toFixed(2)}px`);
+    card.style.setProperty("--mag-r", `${rotation.toFixed(2)}deg`);
+    card.style.setProperty("--mag-scale", scale.toFixed(3));
+    card.style.setProperty("--mag-opacity", opacity.toFixed(3));
+  };
+
+  const measureCards = () => {
+    magneticCards.forEach((card) => setCardMotion(card));
+    cardSnapshots = magneticCards.map((card) => {
+      const rect = card.getBoundingClientRect();
+      return { card, centerX: rect.left + rect.width / 2, centerY: rect.top + rect.height / 2, width: rect.width, height: rect.height };
+    });
+  };
+
+  const resetCards = () => {
+    if (magnetFrame) cancelAnimationFrame(magnetFrame);
+    magnetFrame = null;
+    fieldActive = false;
+    logoField.removeAttribute("data-active");
+    magneticCards.forEach((card) => setCardMotion(card));
+  };
 
   const updateMagnets = () => {
-    magneticCards.forEach((card) => {
-      const rect = card.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      const dx = pointerX - cx;
-      const dy = pointerY - cy;
-      const distance = Math.hypot(dx, dy);
-      const radius = Math.max(190, Math.min(250, rect.width * 1.3));
+    magnetFrame = null;
+    if (!fieldActive) return;
+    const fieldRect = logoField.getBoundingClientRect();
+    logoField.style.setProperty("--field-cursor-x", `${(pointerX - fieldRect.left).toFixed(1)}px`);
+    logoField.style.setProperty("--field-cursor-y", `${(pointerY - fieldRect.top).toFixed(1)}px`);
+    const radius = Math.min(380, Math.max(260, fieldRect.width * .42));
+    const maxSpread = Math.min(38, Math.max(25, fieldRect.width * .036));
 
-      if (distance < radius) {
-        const force = (1 - distance / radius) * 22;
-        const safeDistance = Math.max(distance, 1);
-        card.style.setProperty("--mag-x", `${(-dx / safeDistance * force).toFixed(2)}px`);
-        card.style.setProperty("--mag-y", `${(-dy / safeDistance * force).toFixed(2)}px`);
-        card.style.setProperty("--mag-r", `${(dx / radius * 1.2).toFixed(2)}deg`);
-      } else {
-        card.style.setProperty("--mag-x", "0px");
-        card.style.setProperty("--mag-y", "0px");
-        card.style.setProperty("--mag-r", "0deg");
-      }
+    cardSnapshots.forEach(({ card, centerX, centerY, width, height }) => {
+      const dx = pointerX - centerX;
+      const dy = pointerY - centerY;
+      const distance = Math.hypot(dx, dy);
+      const influence = Math.max(0, 1 - distance / radius);
+      if (influence <= 0) return setCardMotion(card);
+
+      const power = influence * influence * (3 - 2 * influence);
+      const safeDistance = Math.max(distance, 20);
+      const insideBoost = Math.max(0, 1 - distance / Math.max(width, height));
+      const spread = maxSpread * power + 11 * insideBoost;
+      const rowPush = (centerX >= pointerX ? 1 : -1) * maxSpread * .34 * Math.max(0, 1 - Math.abs(dy) / (height * 1.45));
+      const x = Math.max(-40, Math.min(40, (-dx / safeDistance) * spread + rowPush));
+      const y = (-dy / safeDistance) * spread - 7 * power;
+      const z = 24 * power;
+      const rotation = Math.max(-5, Math.min(5, (-dx / Math.max(width, 1)) * 5 * power));
+      setCardMotion(card, x, y, z, rotation, 1 + .032 * power, 1);
     });
-    frameRequested = false;
   };
+
+  logoField.addEventListener("pointerenter", (event) => {
+    if (event.pointerType === "touch") return;
+    measureCards();
+    fieldActive = true;
+    logoField.setAttribute("data-active", "true");
+  });
+
+  logoField.addEventListener("pointermove", (event) => {
+    if (event.pointerType === "touch") return;
+    if (!fieldActive) {
+      measureCards();
+      fieldActive = true;
+      logoField.setAttribute("data-active", "true");
+    }
+    pointerX = event.clientX;
+    pointerY = event.clientY;
+    if (!magnetFrame) magnetFrame = requestAnimationFrame(updateMagnets);
+  }, { passive: true });
+
+  logoField.addEventListener("pointerleave", resetCards);
+  logoField.addEventListener("pointercancel", resetCards);
+  window.addEventListener("resize", resetCards, { passive: true });
 
   window.addEventListener("pointermove", (event) => {
     pointerX = event.clientX;
@@ -181,21 +255,31 @@ if (finePointer && !reducedMotion) {
     root.style.setProperty("--cursor-y", `${pointerY}px`);
     dot.style.transform = `translate3d(${pointerX}px, ${pointerY}px, 0)`;
     document.body.classList.add("cursor-visible");
-    if (!frameRequested) {
-      requestAnimationFrame(updateMagnets);
-      frameRequested = true;
-    }
   }, { passive: true });
 
   document.addEventListener("pointerover", (event) => {
     document.body.classList.toggle("cursor-link", Boolean(event.target.closest("a, button, input")));
   });
 
+  let cursorFrame = null;
   const animateCursor = () => {
     haloX += (pointerX - haloX) * 0.16;
     haloY += (pointerY - haloY) * 0.16;
     halo.style.transform = `translate3d(${haloX}px, ${haloY}px, 0)`;
-    requestAnimationFrame(animateCursor);
+    if (Math.abs(pointerX - haloX) > .1 || Math.abs(pointerY - haloY) > .1) {
+      cursorFrame = requestAnimationFrame(animateCursor);
+    } else {
+      cursorFrame = null;
+    }
   };
-  animateCursor();
+
+  window.addEventListener("pointermove", () => {
+    if (!cursorFrame) cursorFrame = requestAnimationFrame(animateCursor);
+  }, { passive: true });
+
+  document.addEventListener("mouseleave", () => {
+    document.body.classList.remove("cursor-visible", "cursor-link");
+    if (cursorFrame) cancelAnimationFrame(cursorFrame);
+    cursorFrame = null;
+  });
 }
