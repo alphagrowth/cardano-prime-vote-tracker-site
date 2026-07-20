@@ -548,16 +548,56 @@ if (finePointer && !prefersReducedMotion) {
   let haloX = pointerX;
   let haloY = pointerY;
   let magnetFrame = null;
+  let motionFrame = null;
+  let lastMotionAt = 0;
   let cardSnapshots = [];
   let fieldActive = false;
+  const cardMotions = new Map(magneticCards.map((card) => [card, { x: 0, y: 0, targetX: 0, targetY: 0 }]));
 
-  const setCardMotion = (card, x = 0, y = 0) => {
+  const renderCardMotion = (card, x, y) => {
     card.style.setProperty("--mag-x", `${x.toFixed(2)}px`);
     card.style.setProperty("--mag-y", `${y.toFixed(2)}px`);
-    card.style.setProperty("--mag-z", "0px");
-    card.style.setProperty("--mag-r", "0deg");
-    card.style.setProperty("--mag-scale", "1");
-    card.style.setProperty("--mag-opacity", "1");
+  };
+
+  const setCardTarget = (card, x = 0, y = 0) => {
+    const motion = cardMotions.get(card);
+    if (!motion) return;
+    motion.targetX = x;
+    motion.targetY = y;
+  };
+
+  const animateCardMotion = (now) => {
+    const elapsed = lastMotionAt ? Math.max(1, Math.min(32, now - lastMotionAt)) : 16.7;
+    const blend = 1 - Math.exp(-elapsed / 92);
+    lastMotionAt = now;
+    let isSettling = false;
+
+    cardMotions.forEach((motion, card) => {
+      motion.x += (motion.targetX - motion.x) * blend;
+      motion.y += (motion.targetY - motion.y) * blend;
+      if (Math.abs(motion.targetX - motion.x) < .025 && Math.abs(motion.targetY - motion.y) < .025) {
+        motion.x = motion.targetX;
+        motion.y = motion.targetY;
+      } else {
+        isSettling = true;
+      }
+      renderCardMotion(card, motion.x, motion.y);
+    });
+
+    if (isSettling) {
+      motionFrame = requestAnimationFrame(animateCardMotion);
+      return;
+    }
+
+    motionFrame = null;
+    if (!fieldActive) logoField.removeAttribute("data-active");
+  };
+
+  const requestCardMotion = () => {
+    if (!motionFrame) {
+      lastMotionAt = 0;
+      motionFrame = requestAnimationFrame(animateCardMotion);
+    }
   };
 
   const measureCards = () => {
@@ -571,9 +611,9 @@ if (finePointer && !prefersReducedMotion) {
     if (magnetFrame) cancelAnimationFrame(magnetFrame);
     magnetFrame = null;
     fieldActive = false;
-    logoField.removeAttribute("data-active");
     document.body.classList.remove("cursor-over-logos");
-    magneticCards.forEach((card) => setCardMotion(card));
+    magneticCards.forEach((card) => setCardTarget(card));
+    requestCardMotion();
   };
 
   const updateMagnets = () => {
@@ -588,14 +628,15 @@ if (finePointer && !prefersReducedMotion) {
       const dy = pointerY - centerY;
       const distance = Math.hypot(dx, dy);
       const influence = Math.max(0, 1 - distance / radius);
-      if (influence <= 0) return setCardMotion(card);
+      if (influence <= 0) return setCardTarget(card);
 
       const power = influence * influence;
       const safeDistance = Math.max(distance, 32);
       const x = Math.max(-maxShift, Math.min(maxShift, (dx / safeDistance) * maxShift * power));
       const y = Math.max(-maxShift, Math.min(maxShift, (dy / safeDistance) * maxShift * power - 2 * power));
-      setCardMotion(card, x, y);
+      setCardTarget(card, x, y);
     });
+    requestCardMotion();
   };
 
   logoField.addEventListener("pointerenter", (event) => {
