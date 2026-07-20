@@ -5,7 +5,7 @@ A dark-mode public information site for the AlphaGrowth Cardano PRIME governance
 It combines:
 
 - a source-grounded summary of the 12-month PRIME program;
-- a 27-team Cardano DeFi participant field with official dark-mode logo assets;
+- an exact 28-team Cardano DeFi participant field, alphabetized and using dark-mode logo assets;
 - a July 20, 2026 snapshot of all 54 verified on-chain Yes votes, ordered by voting power;
 - the eight public support posts supplied in the proposal appendix.
 

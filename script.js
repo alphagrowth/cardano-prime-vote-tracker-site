@@ -1,40 +1,41 @@
 const teams = [
-  { name: "RealFi", url: "https://realfi.co/", logo: "realfi-logo.svg", status: "PUBLIC SUPPORT" },
+  { name: "Anvil", url: "https://ada-anvil.io/", logo: "anvil.svg" },
+  { name: "Atlas", url: "https://www.atlasdefi.org/", logo: "atlas-defi.png", shape: "icon" },
+  { name: "BankFi", url: "https://www.bankerlabs.io/market", logo: "bankfi.webp" },
+  { name: "CEXplorer", url: "https://cexplorer.io/", logo: "cexplorer.svg" },
+  { name: "CSWAP", url: "https://www.cswap.fi/", logo: "cswap.svg" },
+  { name: "Dano Finance", url: "https://dano.finance/", logo: "dano-finance.svg" },
+  { name: "DexHunter", url: "https://app.dexhunter.io/", logo: "dexhunter.svg", shape: "icon" },
+  { name: "Eternal", url: "https://eternl.io/", logo: "eternl.png", shape: "icon" },
+  { name: "Flow", url: "https://surflending.org/", logo: "flow-surf.png" },
+  { name: "Fluid", url: "https://fluidtokens.com/", logo: "fluidtokens.svg", shape: "icon" },
+  { name: "Flux Point Studio", url: "https://fluxpointstudios.com/", logo: "flux-point-studios.png", shape: "icon" },
+  { name: "Gravity", url: "https://gravitydex.app/", logo: "gravity.png", shape: "icon" },
+  { name: "Harmonic Labs", url: "https://www.harmoniclabs.tech/", logo: "harmonic-labs.svg" },
+  { name: "Indigo", url: "https://indigoprotocol.io/", logo: "indigo-labs.png" },
+  { name: "Lace", url: "https://www.lace.io/", logo: "lace-wordmark.svg" },
+  { name: "Liqwid", url: "https://www.liqwid.finance/", logo: "liqwid.svg", status: "PUBLIC SUPPORT" },
+  { name: "Midgard Labs", url: "https://midgardprotocol.com/", logo: "midgard.png" },
+  { name: "Moneta/USDM", url: "https://moneta.global/", logo: "moneta-usdm.png" },
+  { name: "Pandora", url: "https://pondora.org/", logo: "pondora.svg" },
   { name: "Pogun", url: "https://pogun.io/", logo: "pogun-wordmark.svg" },
+  { name: "Pulse", url: "https://pulsecardano.org/", logo: "pulse.png" },
+  { name: "RealFi", url: "https://realfi.co/", logo: "realfi-logo.svg", status: "PUBLIC SUPPORT" },
+  { name: "SteelSwap", url: "https://steelswap.io/", logo: "steelswap.png", shape: "icon" },
   { name: "Strike Finance", url: "https://www.strikefinance.org/", logo: "strike-finance.svg" },
   { name: "Sundae Labs", url: "https://sundae.fi/", logo: "sundae-labs-dark.png" },
-  { name: "CSWAP DEX", url: "https://www.cswap.fi/", logo: "cswap.svg" },
-  { name: "Liqwid", url: "https://www.liqwid.finance/", logo: "liqwid.svg", status: "PUBLIC SUPPORT" },
-  { name: "Indigo Labs", url: "https://indigoprotocol.io/", logo: "indigo-labs.png" },
-  { name: "Midgard", url: "https://midgardprotocol.com/", logo: "midgard.png" },
-  { name: "Moneta / USDM", url: "https://moneta.global/", logo: "moneta-usdm.png" },
-  { name: "SteelSwap", url: "https://steelswap.io/", logo: "steelswap.png", shape: "icon" },
-  { name: "Eternl", url: "https://eternl.io/", logo: "eternl.png", shape: "icon" },
-  { name: "VESPR", url: "https://vespr.xyz/", logo: "vespr.svg", shape: "icon" },
-  { name: "BankFi", url: "https://www.bankerlabs.io/market", logo: "bankfi.webp" },
-  { name: "Cexplorer.io", url: "https://cexplorer.io/", logo: "cexplorer.svg" },
+  { name: "Vespr", url: "https://vespr.xyz/", logo: "vespr.svg", shape: "icon" },
+  { name: "Wingriders", url: "https://www.wingriders.com/", logo: "wingriders.svg" },
   { name: "Xerberus", url: "https://xerberus.io/", logo: "xerberus.png", shape: "icon" },
-  { name: "Anvil", url: "https://ada-anvil.io/", logo: "anvil.svg" },
-  { name: "FluidTokens", url: "https://fluidtokens.com/", logo: "fluidtokens.svg", shape: "icon" },
-  { name: "DexHunter", url: "https://app.dexhunter.io/", logo: "dexhunter.svg", shape: "icon" },
-  { name: "Flux Point Studio", url: "https://fluxpointstudios.com/", logo: "flux-point-studios.png", shape: "icon" },
-  { name: "WingRiders", url: "https://www.wingriders.com/", logo: "wingriders.svg" },
-  { name: "Atlas DeFi", url: "https://www.atlasdefi.org/", logo: "atlas-defi.png", shape: "icon" },
-  { name: "Harmonic Labs", url: "https://www.harmoniclabs.tech/", logo: "harmonic-labs.svg" },
-  { name: "Flow / Surf", url: "https://surflending.org/", logo: "flow-surf.png" },
-  { name: "Pulse", url: "https://pulsecardano.org/", logo: "pulse.png" },
-  { name: "Pondora", url: "https://pondora.org/", logo: "pondora.svg" },
-  { name: "Dano Finance", url: "https://dano.finance/", logo: "dano-finance.svg" },
-  { name: "Gravity DEX", url: "https://gravitydex.app/", logo: "gravity.png", shape: "icon" },
 ];
 
 const constellation = [
   [0, 1, 18, 132, -0.7], [20, 5, 16, 118, 0.4], [39, 0, 20, 126, -0.25], [62, 5, 17, 118, 0.65], [81, 1, 17, 122, -0.4],
-  [7, 18, 19, 122, 0.35], [30, 21, 18, 128, -0.6], [54, 17, 18, 132, 0.35], [78, 21, 20, 122, -0.3],
+  [0, 18, 18, 122, 0.35], [20, 22, 18, 128, -0.6], [40, 17, 18, 132, 0.35], [61, 22, 18, 122, -0.3], [81, 18, 17, 120, 0.45],
   [0, 36, 17, 120, -0.5], [20, 39, 18, 126, 0.55], [40, 34, 18, 134, -0.25], [61, 40, 18, 120, 0.45], [82, 36, 16, 122, -0.7],
-  [8, 54, 19, 122, 0.3], [31, 57, 18, 118, -0.55], [55, 53, 19, 130, 0.4], [79, 57, 18, 118, -0.35],
-  [0, 72, 18, 122, 0.65], [20, 76, 18, 124, -0.4], [41, 71, 18, 120, 0.3], [62, 76, 18, 126, -0.5], [83, 72, 15, 118, 0.35],
-  [9, 88, 19, 122, -0.3], [32, 91, 18, 120, 0.55], [56, 87, 18, 128, -0.25], [79, 91, 19, 122, 0.35],
+  [0, 54, 18, 122, 0.3], [20, 58, 18, 118, -0.55], [40, 53, 18, 130, 0.4], [61, 58, 18, 118, -0.35], [81, 54, 17, 122, 0.4],
+  [7, 72, 19, 122, 0.65], [31, 76, 18, 124, -0.4], [55, 71, 19, 120, 0.3], [79, 76, 18, 126, -0.5],
+  [8, 88, 19, 122, -0.3], [32, 91, 18, 120, 0.55], [56, 87, 18, 128, -0.25], [79, 91, 19, 122, 0.35],
 ];
 
 const supporters = [
@@ -113,7 +114,7 @@ countTargets.supporters.forEach((selector) => {
   document.querySelector(selector).textContent = supporters.length;
 });
 
-const heroTeamNames = ["RealFi", "Sundae Labs", "Liqwid", "Indigo Labs", "Midgard", "Moneta / USDM", "Anvil", "Gravity DEX"];
+const heroTeamNames = teams.slice(0, 8).map((team) => team.name);
 const heroTeams = heroTeamNames.map((name) => teams.find((team) => team.name === name)).filter(Boolean);
 
 heroTeamRail.innerHTML = heroTeams.map((team) => `
