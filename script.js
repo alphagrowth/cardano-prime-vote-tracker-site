@@ -181,6 +181,7 @@ const liveYesPercent = document.querySelector("#liveYesPercent");
 const liveVoteLabel = document.querySelector("#liveVoteLabel");
 const liveVoteAnnouncement = document.querySelector("#liveVoteAnnouncement");
 const heroYesCount = document.querySelector("#heroYesCount");
+const supporterLiveCount = document.querySelector("#supporterLiveCount");
 const overflowConstellationRows = Math.ceil(Math.max(0, teams.length - constellation.length) / CONSTELLATION_COLUMNS);
 
 if (logoField) {
@@ -246,7 +247,10 @@ async function refreshLiveVoteStatus() {
     liveVoteCore.setAttribute("aria-label", `${accessibleStatus} Open the live AdaStat tracker.`);
     liveVoteCore.setAttribute("title", accessibleStatus);
     liveVoteCore.setAttribute("aria-busy", "false");
-    if (heroYesCount && hasValidYesVotes) heroYesCount.textContent = yesVotes;
+    if (hasValidYesVotes) {
+      if (heroYesCount) heroYesCount.textContent = yesVotes;
+      if (supporterLiveCount) supporterLiveCount.textContent = yesVotes;
+    }
 
     const announcementKey = `${yesPercent.toFixed(2)}:${hasValidYesVotes ? yesVotes : "unknown"}`;
     if (liveVoteAnnouncement && announcementKey !== lastAnnouncedVoteKey) {
