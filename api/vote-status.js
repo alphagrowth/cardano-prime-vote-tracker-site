@@ -4,12 +4,6 @@ const GOVTOOL_PROPOSAL_API_URL = "https://gov.tools/api/proposal/get/529dccaadaa
 const GOVTOOL_STAKE_API_URL = "https://gov.tools/api/network/total-stake";
 const KOIOS_API_URL = "https://api.koios.rest/api/v1/proposal_voting_summary?_proposal_id=gov_action122wue2k65qq8gmpz795z2axt8apka6ay6xt3pwg8jxj5yfkujmtsqvlfpu7";
 
-function toBigInt(value, field) {
-  if (typeof value === "string" && /^\d+$/.test(value)) return BigInt(value);
-  if (typeof value === "number" && Number.isSafeInteger(value) && value >= 0) return BigInt(value);
-  throw new TypeError(`Invalid ${field}`);
-}
-
 function toVoteCount(value) {
   const count = Number(value);
   return Number.isSafeInteger(count) && count >= 0 ? count : null;
@@ -49,11 +43,11 @@ async function fetchText(url, timeoutMs, extraHeaders = {}) {
 async function readAdaStat() {
   const text = await fetchText(ADASTAT_API_URL, 4_500, { Referer: "https://adastat.net/" });
   const data = JSON.parse(text);
-  const yesStake = toBigInt(data.drep_yes_stake, "drep_yes_stake");
-  const totalStake = toBigInt(data.drep_total_stake, "drep_total_stake");
-  const abstainStake = toBigInt(data.drep_abstain_stake, "drep_abstain_stake");
-  const alwaysAbstainStake = toBigInt(data.drep_always_abstain_stake, "drep_always_abstain_stake");
-  const inactiveStake = toBigInt(data.drep_inactive_stake, "drep_inactive_stake");
+  const yesStake = extractJsonInteger(text, "drep_yes_stake");
+  const totalStake = extractJsonInteger(text, "drep_total_stake");
+  const abstainStake = extractJsonInteger(text, "drep_abstain_stake");
+  const alwaysAbstainStake = extractJsonInteger(text, "drep_always_abstain_stake");
+  const inactiveStake = extractJsonInteger(text, "drep_inactive_stake");
   const eligibleVotingStake = totalStake - abstainStake - alwaysAbstainStake - inactiveStake;
 
   return {
