@@ -447,7 +447,7 @@ h1 span { color: var(--green); }
   opacity: var(--mag-opacity);
   transform-origin: center;
   transform: translate3d(var(--mag-x), calc(var(--mag-y) + var(--float-y)), var(--mag-z)) rotate(calc(var(--base-r) + var(--float-r) + var(--mag-r))) scale(var(--mag-scale));
-  transition: opacity .22s ease, border-color .22s ease, background .22s ease, box-shadow .28s ease, transform .22s cubic-bezier(.16,1,.3,1);
+  transition: opacity .22s ease, border-color .22s ease, background .22s ease, box-shadow .28s ease;
   animation: idle-float calc(var(--float-speed) * 1s) ease-in-out 16 both;
   animation-delay: var(--delay);
 }
