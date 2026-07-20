@@ -5,9 +5,9 @@ A dark-mode public information site for the AlphaGrowth Cardano PRIME governance
 It combines:
 
 - a source-grounded summary of the 12-month PRIME program;
-- the Cardano DeFi ecosystem logo field;
-- a July 20, 2026 snapshot of every verified on-chain DRep Yes vote;
-- recent public support and discussion posts.
+- a 27-team Cardano DeFi participant field with official dark-mode logo assets;
+- a July 20, 2026 snapshot of all 54 verified on-chain Yes votes, ordered by voting power;
+- the eight public support posts supplied in the proposal appendix.
 
 The site is static HTML, CSS, and JavaScript and deploys directly to Vercel.
 
