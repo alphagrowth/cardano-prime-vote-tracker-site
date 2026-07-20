@@ -182,6 +182,8 @@ const liveVoteLabel = document.querySelector("#liveVoteLabel");
 const liveVoteAnnouncement = document.querySelector("#liveVoteAnnouncement");
 const heroYesCount = document.querySelector("#heroYesCount");
 const supporterLiveCount = document.querySelector("#supporterLiveCount");
+const orbitTeamCount = document.querySelector("#orbitTeamCount");
+const orbitYesCount = document.querySelector("#orbitYesCount");
 const overflowConstellationRows = Math.ceil(Math.max(0, teams.length - constellation.length) / CONSTELLATION_COLUMNS);
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const countFormatter = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
@@ -302,7 +304,7 @@ counterElements.forEach((element) => {
 });
 
 const countTargets = {
-  teams: ["#heroTeamMetric", "#ecosystemTeamCount"],
+  teams: ["#heroTeamMetric", "#ecosystemTeamCount", "#orbitTeamCount"],
   supporters: ["#supporterCount"],
 };
 
@@ -363,6 +365,7 @@ async function refreshLiveVoteStatus() {
     if (hasValidYesVotes) {
       setCountTarget(heroYesCount, yesVotes);
       setCountTarget(supporterLiveCount, yesVotes);
+      setCountTarget(orbitYesCount, yesVotes);
     }
 
     const announcementKey = `${yesPercent.toFixed(2)}:${hasValidYesVotes ? yesVotes : "unknown"}`;
