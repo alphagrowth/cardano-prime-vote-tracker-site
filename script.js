@@ -2,6 +2,7 @@ const teams = [
   { name: "Anvil", url: "https://ada-anvil.io/", logo: "anvil.svg" },
   { name: "Atlas", url: "https://www.atlasdefi.org/", logo: "atlas-defi.png", shape: "icon" },
   { name: "BankFi", url: "https://www.bankerlabs.io/market", logo: "bankfi.webp" },
+  { name: "Butane", url: "https://butane.dev/", logoUrl: "https://github.com/butaneprotocol.png?size=400", shape: "icon" },
   { name: "CEXplorer", url: "https://cexplorer.io/", logo: "cexplorer.svg" },
   { name: "CSWAP", url: "https://www.cswap.fi/", logo: "cswap.svg" },
   { name: "Dano Finance", url: "https://dano.finance/", logo: "dano-finance.svg" },
@@ -11,7 +12,6 @@ const teams = [
   { name: "Fluid", url: "https://fluidtokens.com/", logo: "fluidtokens.svg", shape: "icon" },
   { name: "Flux Point Studio", url: "https://fluxpointstudios.com/", logo: "flux-point-studios.png", shape: "icon" },
   { name: "Gravity", url: "https://gravitydex.app/", logo: "gravity.png", shape: "icon" },
-  { name: "Harmonic Labs", url: "https://www.harmoniclabs.tech/", logo: "harmonic-labs.svg" },
   { name: "Indigo", url: "https://indigoprotocol.io/", logo: "indigo-labs.png" },
   { name: "Lace", url: "https://www.lace.io/", logo: "lace-wordmark.svg" },
   { name: "Liqwid", url: "https://www.liqwid.finance/", logo: "liqwid.svg", status: "PUBLIC SUPPORT" },
@@ -41,6 +41,34 @@ const constellation = [
   [8.4, 57, 15.5, 112, 0.22], [25.2, 56, 15.3, 108, -0.26], [42, 57, 15.6, 114, 0.18], [58.8, 56, 15.4, 110, -0.22], [75.6, 57, 15.5, 112, 0.2],
   [0, 75, 15.4, 110, -0.18], [16.8, 74, 15.5, 114, 0.24], [33.6, 75, 15.3, 112, -0.22], [50.4, 74, 15.6, 108, 0.18], [67.2, 75, 15.4, 112, -0.24], [84, 74, 15.5, 110, 0.2],
 ];
+
+const CONSTELLATION_COLUMNS = 6;
+const CONSTELLATION_OVERFLOW_ROW_HEIGHT = 132;
+const CONSTELLATION_OVERFLOW_FIELD_SPACE = 154;
+
+function getConstellationSlot(index) {
+  const slot = constellation[index];
+  if (slot) {
+    const [x, y, w, h, rotation] = slot;
+    return { x, y, cardLeft: `${x}%`, cardTop: `${y}%`, w, h, rotation };
+  }
+
+  const overflowIndex = index - constellation.length;
+  const column = overflowIndex % CONSTELLATION_COLUMNS;
+  const row = Math.floor(overflowIndex / CONSTELLATION_COLUMNS);
+  const rotations = [-0.18, 0.22, -0.24, 0.16, -0.2, 0.26];
+
+  const x = Number((column * 16.8).toFixed(1));
+  return {
+    x,
+    y: 0,
+    cardLeft: `${x}%`,
+    cardTop: `calc(var(--constellation-base-height) - 34px + ${row * CONSTELLATION_OVERFLOW_ROW_HEIGHT}px)`,
+    w: 15.4 + (column % 2) * 0.2,
+    h: 110 + (column % 3) * 2,
+    rotation: rotations[column],
+  };
+}
 
 const supporters = [
   ["YUTA", "drep1y2200we9c904un36tzaearntzzl63snffuul9qsk0te4utqfkke0w", 432949136.044909, 2],
@@ -153,6 +181,11 @@ const liveYesPercent = document.querySelector("#liveYesPercent");
 const liveVoteLabel = document.querySelector("#liveVoteLabel");
 const liveVoteAnnouncement = document.querySelector("#liveVoteAnnouncement");
 const heroYesCount = document.querySelector("#heroYesCount");
+const overflowConstellationRows = Math.ceil(Math.max(0, teams.length - constellation.length) / CONSTELLATION_COLUMNS);
+
+if (logoField) {
+  logoField.style.setProperty("--constellation-extra-space", `${overflowConstellationRows * CONSTELLATION_OVERFLOW_FIELD_SPACE}px`);
+}
 
 const countTargets = {
   teams: ["#heroTeamMetric", "#ecosystemTeamCount"],
@@ -263,7 +296,8 @@ logoField.innerHTML = `
     <span class="field-core__label"><span>CARDANO</span><strong>DeFi</strong><span>PRIME NETWORK</span></span>
   </div>
 ` + teams.map((team, index) => {
-  const [x, y, w, h, rotation] = constellation[index];
+  const { x, y, cardLeft, cardTop, w, h, rotation } = getConstellationSlot(index);
+  const logoSource = team.logoUrl || `assets/ecosystem/${team.logo}`;
   return `
   <a
     class="team-card"
@@ -272,11 +306,11 @@ logoField.innerHTML = `
     rel="noreferrer"
     data-shape="${team.shape || "wide"}"
     data-invert="${team.invert || false}"
-    style="--x:${x};--y:${y};--w:${w};--h:${h};--base-r:${rotation}deg;--float-speed:${(7.2 + (index % 5) * .52).toFixed(2)};--delay:-${(index * 0.61).toFixed(2)}s"
+    style="--x:${x};--y:${y};--card-left:${cardLeft};--card-top:${cardTop};--w:${w};--h:${h};--base-r:${rotation}deg;--float-speed:${(7.2 + (index % 5) * .52).toFixed(2)};--delay:-${(index * 0.61).toFixed(2)}s"
     aria-label="${team.linkLabel || `Visit ${team.name}`}"
   >
     ${team.status ? `<span class="team-status">${team.status}</span>` : ""}
-    <img src="assets/ecosystem/${team.logo}" alt="${team.name}" loading="${index < 8 ? "eager" : "lazy"}" />
+    <img src="${logoSource}" alt="${team.name}" loading="${index < 8 ? "eager" : "lazy"}" />
     <span class="team-name">${String(index + 1).padStart(2, "0")} · ${team.name}</span>
   </a>
   `;
