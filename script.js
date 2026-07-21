@@ -329,7 +329,7 @@ async function refreshLiveVoteStatus() {
   const timeout = window.setTimeout(() => controller.abort(), 12_000);
 
   try {
-    const response = await fetch("/api/vote-status", {
+    const response = await fetch("api/vote-status", {
       headers: { Accept: "application/json" },
       cache: "no-store",
       signal: controller.signal,
