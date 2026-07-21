@@ -116,7 +116,7 @@ body.cursor-over-logos .cursor-halo, body.cursor-over-logos .cursor-dot { opacit
   backdrop-filter: blur(18px);
 }
 .brand { display: flex; align-items: center; gap: 13px; width: fit-content; }
-.brand img { width: 132px; height: 25px; object-fit: contain; object-position: left center; }
+.brand img { width: 188px; height: 25px; object-fit: contain; object-position: left center; }
 .brand-divider { width: 1px; height: 24px; background: var(--line); }
 .brand-program { font: 600 10px/1.1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .13em; color: var(--muted); }
 .site-header nav { display: flex; gap: 30px; font-size: 13px; color: var(--muted); }
@@ -581,7 +581,7 @@ h1 span { color: var(--green); }
 .closing h2 { font-size: clamp(48px, 7vw, 100px); }
 .button-large { min-height: 68px; padding: 0 28px; flex: 0 0 auto; }
 .site-footer { display: grid; grid-template-columns: auto 1fr auto; gap: 40px; align-items: center; padding: 38px clamp(20px, 6vw, 92px); border-top: 1px solid var(--line); }
-.footer-brand img { width: 128px; height: 26px; object-fit: contain; object-position: left; }
+.footer-brand img { width: 195px; height: 26px; object-fit: contain; object-position: left; }
 .site-footer p { margin: 0; color: #747970; font-size: 11px; }
 .site-footer > div { display: flex; gap: 22px; color: var(--muted); font-size: 11px; }
 .site-footer a:hover, .site-footer a:focus-visible { color: var(--green); }
@@ -611,7 +611,7 @@ h1 span { color: var(--green); }
 
 @media (max-width: 720px) {
   .site-header { height: 68px; }
-  .brand img { width: 116px; }
+  .brand img { width: 160px; }
   .brand-program, .brand-divider { display: none; }
   .header-action { font-size: 10px; }
   .hero { padding-top: 128px; }

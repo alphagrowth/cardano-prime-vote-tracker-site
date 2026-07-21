@@ -14,7 +14,7 @@ const teams = [
   { name: "Gravity", url: "https://gravitydex.app/", logo: "gravity.png", shape: "icon" },
   { name: "Indigo", url: "https://indigoprotocol.io/", logo: "indigo-labs.png" },
   { name: "Lace", url: "https://www.lace.io/", logo: "lace-wordmark.svg" },
-  { name: "Liqwid", url: "https://www.liqwid.finance/", logo: "liqwid.svg", status: "PUBLIC SUPPORT" },
+  { name: "Liqwid", url: "https://www.liqwid.finance/", logo: "liqwid.svg" },
   {
     name: "Midgard Labs",
     url: "https://x.com/phil_uplc/status/2068021257434542489",
@@ -25,7 +25,7 @@ const teams = [
   { name: "Pandora", url: "https://pondora.org/", logo: "pondora.svg" },
   { name: "Pogun", url: "https://pogun.io/", logo: "pogun-wordmark.svg" },
   { name: "Pulse", url: "https://pulsecardano.org/", logo: "pulse.png" },
-  { name: "RealFi", url: "https://realfi.co/", logo: "realfi-logo.svg", status: "PUBLIC SUPPORT" },
+  { name: "RealFi", url: "https://realfi.co/", logo: "realfi-logo.svg" },
   { name: "SteelSwap", url: "https://steelswap.io/", logo: "steelswap.png", shape: "icon" },
   { name: "Strike Finance", url: "https://www.strikefinance.org/", logo: "strike-finance.svg" },
   { name: "Sundae Labs", url: "https://sundae.fi/", logo: "sundae-labs-dark.png" },
