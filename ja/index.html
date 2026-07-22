@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta
+      name="description"
+      content="AlphaGrowth Cardano PRIME：Cardano上の持続可能なDeFi成長のための、コミュニティが監督する12か月間のプログラム。"
+    />
+    <meta property="og:title" content="AlphaGrowth × Cardano PRIME" />
+    <meta
+      property="og:description"
+      content="提案、CardanoのDeFiの全体像、そして検証済みのDRepの賛成票をすべて一か所に。"
+    />
+    <meta property="og:type" content="website" />
+    <link rel="canonical" href="https://alphagrowth.io/cardano-prime-vote/ja/" />
+    <link rel="alternate" hreflang="en" href="https://alphagrowth.io/cardano-prime-vote/" />
+    <link rel="alternate" hreflang="es" href="https://alphagrowth.io/cardano-prime-vote/es/" />
+    <link rel="alternate" hreflang="ja" href="https://alphagrowth.io/cardano-prime-vote/ja/" />
+    <link rel="alternate" hreflang="x-default" href="https://alphagrowth.io/cardano-prime-vote/" />
+    <link rel="icon" href="../assets/brand/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../styles.css" />
+    <title>AlphaGrowth × Cardano PRIME</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">コンテンツにスキップ</a>
+    <div class="noise" aria-hidden="true"></div>
+    <div class="cursor-halo" aria-hidden="true"></div>
+    <div class="cursor-dot" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="AlphaGrowth Cardano PRIME ホーム">
+        <img src="../assets/brand/alphagrowth-full-logo.svg" alt="AlphaGrowth" />
+        <span class="brand-divider" aria-hidden="true"></span>
+        <span class="brand-program">CARDANO PRIME</span>
+      </a>
+      <nav class="primary-nav" aria-label="メインナビゲーション">
+        <a href="#ecosystem">DeFiチーム</a>
+        <a href="#program">提案の状況</a>
+        <a href="#supporters">賛成投票者</a>
+      </nav>
+      <div class="header-tools">
+        <nav class="language-switch" aria-label="言語選択">
+          <a href="../" lang="en" hreflang="en">EN</a>
+          <a href="../es/" lang="es" hreflang="es">ES</a>
+          <a href="./" lang="ja" hreflang="ja" aria-current="page">JA</a>
+        </nav>
+        <a
+          class="header-action"
+          href="https://gov.tools/governance_actions/a75645e0871f3dbb6207df867d9bd6a1a3a5befa40d68df6da651db4d6607fbf#0"
+          target="_blank"
+          rel="noreferrer"
+        >NCLに投票 <span aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="hero-copy reveal">
+          <div class="eyebrow"><span class="live-dot"></span> ガバナンスアクション · 投票実施中</div>
+          <h1>CardanoのDeFiは<br /><span>スケールの準備が整った。</span></h1>
+          <p class="hero-lede">
+            PRIMEは、Cardanoの技術的な強みを、より厚い流動性、有用な統合、そして持続的なオンチェーン成長へと
+            転換するための、コミュニティが監督する12か月間のプログラムです。
+          </p>
+          <div class="hero-actions">
+            <a
+              class="button button-primary"
+              href="https://gov.tools/governance_actions/a75645e0871f3dbb6207df867d9bd6a1a3a5befa40d68df6da651db4d6607fbf#0"
+              target="_blank"
+              rel="noreferrer"
+            >ここで純変動上限（NCL）に投票 <span aria-hidden="true">↗</span></a>
+            <a
+              class="button button-ghost"
+              href="https://gov.tools/governance_actions/529dccaadaa000746c22f1682574cb3f436eeba4d19710b90791a54226dc96d7#0"
+              target="_blank"
+              rel="noreferrer"
+            >ここでAlphaGrowthの提案に投票 <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+
+        <div class="hero-orbit">
+          <div class="orbit orbit-one" aria-hidden="true"></div>
+          <div class="orbit orbit-two" aria-hidden="true"></div>
+          <a
+            class="orbit-core"
+            id="liveVoteCore"
+            data-feed-state="loading"
+            href="https://adastat.net/governances/529dccaadaa000746c22f1682574cb3f436eeba4d19710b90791a54226dc96d700"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="AdaStatによるDRepの賛成投票力（ライブ）。読み込み中。"
+            aria-busy="true"
+          >
+            <span id="liveVoteEyebrow">ライブ · ADASTAT</span>
+            <strong id="liveYesPercent">--.--%</strong>
+            <small id="liveVoteLabel">接続中</small>
+          </a>
+          <span class="sr-only" id="liveVoteAnnouncement" role="status" aria-live="polite"></span>
+          <div class="orbit-stat tag-one">
+            <span class="orbit-stat__dot" aria-hidden="true"></span>
+            <span class="orbit-stat__copy">
+              <strong id="orbitTeamCount" class="count-number" data-count-animate data-count-label="連携中のDeFiアプリ">--</strong>
+              <small aria-hidden="true">連携中の<br />DeFiアプリ</small>
+            </span>
+          </div>
+          <div class="orbit-stat tag-two">
+            <span class="orbit-stat__dot" aria-hidden="true"></span>
+            <span class="orbit-stat__copy">
+              <strong id="orbitYesCount" class="count-number" data-count-animate data-count-label="DRepの賛成票">--</strong>
+              <small aria-hidden="true">DRepの<br />賛成票</small>
+            </span>
+          </div>
+        </div>
+
+        <div class="metric-strip reveal" aria-label="提案の主要数値">
+          <div><strong>12</strong><span>か月プログラム</span></div>
+          <div><strong>$200M+</strong><span>適格純TVL目標</span></div>
+          <div><strong id="heroTeamMetric" class="count-number" data-count-animate data-count-label="参加プロトコル">--</strong><span>参加プロトコル</span></div>
+          <div><strong id="heroYesCount" class="count-number" data-count-animate data-count-label="賛成票を投じるDRep">--</strong><span>賛成票を投じるDRep</span></div>
+        </div>
+      </section>
+
+      <section class="ecosystem" id="ecosystem">
+        <div class="section-shell">
+          <div class="section-intro reveal">
+            <div>
+              <p class="kicker">参加者の顔ぶれ</p>
+              <h2><span id="ecosystemTeamCount" class="count-number" data-count-animate data-count-label="参加プロトコル">--</span>個のプロトコル。<br />ひとつの成長への推進力。</h2>
+            </div>
+            <p>
+              現在の参加者リストに挙げられているDeFi、インフラ、ディストリビューションの各プロトコルです。カウントは下記の
+              リストから生成されるため、このページは連合の拡大とともに成長します。
+            </p>
+          </div>
+          <div class="ecosystem-note reveal">
+            <span aria-hidden="true">◎</span>
+            <p>ロゴの掲載は参加しているエコシステムを示すものであり、それ自体が提案への正式な支持を意味するものではありません。</p>
+          </div>
+          <div class="logo-field" id="logoField" aria-label="参加しているCardano DeFiプロトコル"></div>
+        </div>
+      </section>
+
+      <section class="program section-shell" id="program">
+        <div class="section-intro reveal">
+          <div>
+            <p class="kicker">ALPHAGROWTHの提案状況</p>
+            <h2>準備から成長へと至る、<br />規律ある道筋。</h2>
+          </div>
+          <p>
+            PRIMEは技術的なデューデリジェンスを前倒しで行い、資金の大部分を公開のリリースゲートの後ろに留め、その成果を
+            オンチェーンで測定します。未使用・未獲得・未リリースの資金は、定義された6つのトリガーに基づいてCardanoトレジャリーへ返還されます。
+          </p>
+        </div>
+
+        <div class="phase-grid">
+          <article class="phase-card reveal">
+            <span class="phase-number">01</span>
+            <div>
+              <p class="phase-label">準備</p>
+              <h3>基盤を監査する</h3>
+              <p>資本を投下する前に、プロトコル、インフラ、流動性の経路、統合の準備状況を精査します。</p>
+            </div>
+          </article>
+          <article class="phase-card reveal">
+            <span class="phase-number">02</span>
+            <div>
+              <p class="phase-label">設計</p>
+              <h3>ギャップを埋める</h3>
+              <p>監査の結果を、公開の提言、パートナー計画、そして責任者が明確な展開ロードマップへと落とし込みます。</p>
+            </div>
+          </article>
+          <article class="phase-card phase-card-accent reveal">
+            <span class="phase-number">03</span>
+            <div>
+              <p class="phase-label">実行</p>
+              <h3>展開し、測定する</h3>
+              <p>ゲートされた資本は第4か月の判断を経てはじめて放出し、その後、実行の経済性を検証済みの成長に連動させます。</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="public-pulse reveal">
+          <div class="pulse-heading">
+            <p class="kicker">パブリックの声</p>
+            <h3>8つの声。<br />ひとつの明確なシグナル。</h3>
+            <p>ここに掲載しているのは、提出された支持の付録に含まれる公開の投稿のみです。</p>
+          </div>
+          <div class="pulse-list">
+            <a href="https://x.com/ecatxvc/status/2076722011754377501" target="_blank" rel="noreferrer">
+              <span class="pulse-account">@ecatxvc · INDIGO</span>
+              <p>Cardanoは大胆で協調的な計画により、DeFiインフラのギャップに対処し、新規で定着性の高い流動性をめぐって競争できる。</p>
+              <span class="pulse-link">投稿を見る ↗</span>
+            </a>
+            <a href="https://x.com/realdecimalist/status/2075360913784492316" target="_blank" rel="noreferrer">
+              <span class="pulse-account">@realdecimalist · FLUX POINT</span>
+              <p>「大きな要求だが、まさに必要なものだ。」</p>
+              <span class="pulse-link">投稿を見る ↗</span>
+            </a>
+            <a href="https://x.com/CashAnvil/status/2075288327461228995" target="_blank" rel="noreferrer">
+              <span class="pulse-account">@CashAnvil · ANVIL</span>
+              <p>「彼らは本物だ」。そしてCardanoを、これまで届かなかった場所へと押し上げる力になり得る。</p>
+              <span class="pulse-link">投稿を見る ↗</span>
+            </a>
+            <a href="https://x.com/phil_uplc/status/2068021257434542489" target="_blank" rel="noreferrer">
+              <span class="pulse-account">@phil_uplc · ANASTASIA</span>
+              <p>「AlphaGrowthはホームランバッターだ。」</p>
+              <span class="pulse-link">投稿を見る ↗</span>
+            </a>
+            <a href="https://x.com/IOGroup/status/2069329298985537838" target="_blank" rel="noreferrer">
+              <span class="pulse-account">@IOGroup</span>
+              <p>PRIMEは、Compound、Uniswap、Arbitrumでの経験に裏打ちされた12か月間のプレイブックをもたらす。</p>
+              <span class="pulse-link">投稿を見る ↗</span>
+            </a>
+            <a href="https://x.com/liqwidfinance/status/2078203030390874165" target="_blank" rel="noreferrer">
+              <span class="pulse-account">@liqwidfinance</span>
+              <p>PRIMEは、CardanoのDeFiを加速させる実証済みの手法をめぐる、重要なガバナンス上の議論を生み出す。</p>
+              <span class="pulse-link">投稿を見る ↗</span>
+            </a>
+            <a href="https://x.com/realfi_co/status/2079130776998715847" target="_blank" rel="noreferrer">
+              <span class="pulse-account">@realfi_co</span>
+              <p>「流動性、より深いDeFiの活用、そして持続可能なオンチェーン成長に焦点を当てた、協調的な12か月間の取り組み。」</p>
+              <span class="pulse-link">投稿を見る ↗</span>
+            </a>
+            <a href="https://x.com/MicheleHarmonic/status/2075309296166818019" target="_blank" rel="noreferrer">
+              <span class="pulse-account">@MicheleHarmonic · GRAVITY</span>
+              <p>AlphaGrowthは分散型DeFiを理解しており、トレジャリーの流動性をユーザーと流動性プロバイダーのためにどう配分できるかを心得ている。</p>
+              <span class="pulse-link">投稿を見る ↗</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="supporters section-shell" id="supporters">
+        <div class="section-intro reveal">
+          <div>
+            <p class="kicker">オンチェーンで検証済み</p>
+            <h2>DRepたちの投票は<br /><em>賛成。</em></h2>
+            <p class="supporters-deck">現在の投票力の順に並べ、カラーの階層と、出典が検証された公開プロフィール画像を添えています。一致する情報がないアイデンティティには、未検証の写真ではなく中立的なモノグラムを使用します。</p>
+          </div>
+          <div class="vote-summary">
+            <strong id="supporterLiveCount" class="count-number" data-count-animate data-count-label="賛成票を投じるDRep">--</strong>
+            <span>ライブの賛成票</span>
+            <small><span id="supporterCount" class="count-number" data-count-animate data-count-label="検証済みのDRepプロフィール">--</span>件の検証済みDRepプロフィールを以下に表示</small>
+          </div>
+        </div>
+
+        <div class="supporter-tools reveal">
+          <label for="drepSearch">DRepを探す</label>
+          <div class="search-wrap">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z" /></svg>
+            <input id="drepSearch" type="search" autocomplete="off" placeholder="検証済みの賛成リストを検索" />
+          </div>
+          <span class="results-count" id="drepResultCount" aria-live="polite">検証済みの賛成投票者を読み込み中</span>
+          <a
+            href="https://adastat.net/governances/529dccaadaa000746c22f1682574cb3f436eeba4d19710b90791a54226dc96d700"
+            target="_blank"
+            rel="noreferrer"
+          >AdaStatでライブの投票トラッカーを開く ↗</a>
+        </div>
+
+        <div class="power-legend reveal" aria-label="投票力のカラー階層">
+          <span><i data-tier="keystone"></i>100M+ ADA</span>
+          <span><i data-tier="major"></i>25M–99.9M</span>
+          <span><i data-tier="established"></i>5M–24.9M</span>
+          <span><i data-tier="growing"></i>1M–4.9M</span>
+          <span><i data-tier="community"></i>1M未満</span>
+        </div>
+
+        <div class="drep-grid" id="drepGrid" role="list"></div>
+        <p class="empty-state" id="emptyState" hidden>その検索に一致する検証済みの賛成投票者はいません。</p>
+      </section>
+
+      <section class="closing section-shell reveal">
+        <div>
+          <p class="kicker">決定は今、進行中</p>
+          <h2>説明責任あるDeFiの成長を<br />後押ししよう。</h2>
+        </div>
+        <a
+          class="button button-primary button-large"
+          href="https://gov.tools/governance_actions/529dccaadaa000746c22f1682574cb3f436eeba4d19710b90791a54226dc96d7#0"
+          target="_blank"
+          rel="noreferrer"
+        >ここでAlphaGrowthの提案に投票 <span aria-hidden="true">↗</span></a>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a class="footer-brand" href="#top">
+        <img src="../assets/brand/alphagrowth-full-logo.svg" alt="AlphaGrowth" />
+      </a>
+      <p>Cardano PRIMEガバナンスアクションのための、独立したコミュニティ情報サイト。</p>
+      <div>
+        <a href="https://alphagrowth.io/" target="_blank" rel="noreferrer">AlphaGrowth ↗</a>
+        <a
+          href="https://adastat.net/governances/529dccaadaa000746c22f1682574cb3f436eeba4d19710b90791a54226dc96d700"
+          target="_blank"
+          rel="noreferrer"
+        >ライブ投票トラッカー · AdaStat ↗</a>
+        <a href="https://github.com/davedio/alphagrowth-cardano-prime" target="_blank" rel="noreferrer">GitHub ↗</a>
+      </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>

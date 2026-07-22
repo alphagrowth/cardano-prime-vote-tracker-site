@@ -116,13 +116,18 @@ body.cursor-over-logos .cursor-halo, body.cursor-over-logos .cursor-dot { opacit
   backdrop-filter: blur(18px);
 }
 .brand { display: flex; align-items: center; gap: 13px; width: fit-content; }
-.brand img { width: 188px; height: 25px; object-fit: contain; object-position: left center; }
+.brand img { width: 160px; height: 21px; object-fit: contain; object-position: left center; }
 .brand-divider { width: 1px; height: 24px; background: var(--line); }
 .brand-program { font: 600 10px/1.1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .13em; color: var(--muted); }
-.site-header nav { display: flex; gap: 30px; font-size: 13px; color: var(--muted); }
-.site-header nav a, .header-action { transition: color .2s ease; }
-.site-header nav a:hover, .site-header nav a:focus-visible, .header-action:hover, .header-action:focus-visible { color: var(--green); }
-.header-action { justify-self: end; display: inline-flex; align-items: center; min-height: 44px; font: 600 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .04em; }
+.primary-nav { display: flex; gap: 30px; font-size: 13px; color: var(--muted); }
+.header-tools { justify-self: end; display: flex; align-items: center; gap: 16px; }
+.language-switch { display: inline-flex; align-items: center; gap: 2px; padding: 3px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255, 255, 255, 0.04); }
+.language-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 31px; height: 28px; padding: 0 9px; border-radius: 999px; color: var(--muted); font: 700 14px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .04em; transition: color .2s ease, background .2s ease; }
+.language-switch a[aria-current="page"] { color: #0a0a0a; background: var(--green); }
+.primary-nav a, .header-action { transition: color .2s ease; }
+.primary-nav a:hover, .primary-nav a:focus-visible, .header-action:hover, .header-action:focus-visible, .language-switch a:hover, .language-switch a:focus-visible { color: var(--green); }
+.language-switch a[aria-current="page"]:hover, .language-switch a[aria-current="page"]:focus-visible { color: #0a0a0a; }
+.header-action { display: inline-flex; align-items: center; min-height: 44px; font: 600 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .04em; }
 
 :where(a, button, input):focus-visible {
   outline: 2px solid var(--green);
@@ -581,7 +586,7 @@ h1 span { color: var(--green); }
 .closing h2 { font-size: clamp(48px, 7vw, 100px); }
 .button-large { min-height: 68px; padding: 0 28px; flex: 0 0 auto; }
 .site-footer { display: grid; grid-template-columns: auto 1fr auto; gap: 40px; align-items: center; padding: 38px clamp(20px, 6vw, 92px); border-top: 1px solid var(--line); }
-.footer-brand img { width: 195px; height: 26px; object-fit: contain; object-position: left; }
+.footer-brand img { width: 166px; height: 22px; object-fit: contain; object-position: left; }
 .site-footer p { margin: 0; color: #747970; font-size: 11px; }
 .site-footer > div { display: flex; gap: 22px; color: var(--muted); font-size: 11px; }
 .site-footer a:hover, .site-footer a:focus-visible { color: var(--green); }
@@ -591,7 +596,7 @@ h1 span { color: var(--green); }
 
 @media (max-width: 1050px) {
   .site-header { grid-template-columns: 1fr auto; }
-  .site-header nav { display: none; }
+  .primary-nav { display: none; }
   .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 150px; }
   .hero-copy { max-width: 830px; }
   .hero-orbit { width: min(72vw, 480px); margin: 80px auto 0; }
@@ -611,8 +616,10 @@ h1 span { color: var(--green); }
 
 @media (max-width: 720px) {
   .site-header { height: 68px; }
-  .brand img { width: 160px; }
+  .brand img { width: 136px; }
   .brand-program, .brand-divider { display: none; }
+  .header-tools { gap: 10px; }
+  .language-switch a { min-width: 27px; height: 26px; padding: 0 7px; font-size: 14px; }
   .header-action { font-size: 10px; }
   .hero { padding-top: 128px; }
   .hero h1 { font-size: clamp(50px, 16vw, 74px); }
@@ -642,6 +649,7 @@ h1 span { color: var(--green); }
 }
 
 @media (max-width: 440px) {
+  .header-action { display: none; }
   .metric-strip span { font-size: 10px; }
   .orbit-stat { gap: 5px; padding: 7px 8px; border-radius: 14px; font-size: 6.5px; letter-spacing: .09em; }
   .orbit-stat__dot { width: 4px; height: 4px; flex-basis: 4px; }
